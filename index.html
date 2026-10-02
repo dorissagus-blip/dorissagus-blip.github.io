@@ -3,40 +3,953 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Marine Fuel Survey & ROB Control</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #1b2a3a;
+            background: #f7f9fb;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           NAVIGATION
+        ========================= */
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 20px 7%;
+
+            background: rgba(4, 35, 58, 0.96);
+        }
+
+        .logo {
+            color: white;
+            font-size: 19px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #f5a623;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 28px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            color: #f5a623;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+
+            padding: 120px 7% 80px;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    rgba(3, 29, 50, 0.78),
+                    rgba(3, 29, 50, 0.90)
+                ),
+                url("https://images.unsplash.com/photo-1494412651409-8963ce7935a7?auto=format&fit=crop&w=2000&q=80");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .hero-label {
+            color: #f5a623;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: clamp(45px, 6vw, 78px);
+            line-height: 1.05;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            color: #f5a623;
+        }
+
+        .hero p {
+            max-width: 700px;
+            font-size: 20px;
+            color: #dbe7ef;
+            margin-bottom: 35px;
+        }
+
+        .button {
+            display: inline-block;
+
+            padding: 15px 28px;
+
+            background: #f5a623;
+            color: #062b49;
+
+            text-decoration: none;
+            font-weight: bold;
+
+            border-radius: 4px;
+
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            background: white;
+            transform: translateY(-2px);
+        }
+
+        /* =========================
+           SECTIONS
+        ========================= */
+
+        section {
+            padding: 100px 7%;
+        }
+
+        .section-title {
+            max-width: 750px;
+            margin: 0 auto 55px;
+            text-align: center;
+        }
+
+        .section-title .label {
+            color: #f5a623;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .section-title h2 {
+            margin-top: 10px;
+            font-size: 42px;
+            color: #062b49;
+        }
+
+        .section-title p {
+            margin-top: 15px;
+            color: #6b7b88;
+        }
+
+        /* =========================
+           SERVICES
+        ========================= */
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .service-card {
+
+            background: white;
+
+            padding: 35px;
+
+            border-radius: 8px;
+
+            box-shadow:
+                0 10px 35px rgba(0,0,0,0.07);
+
+            border-top: 3px solid transparent;
+
+            transition: 0.3s;
+        }
+
+        .service-card:hover {
+
+            transform: translateY(-7px);
+
+            border-top: 3px solid #f5a623;
+        }
+
+        .service-icon {
+            font-size: 35px;
+            margin-bottom: 18px;
+        }
+
+        .service-card h3 {
+            color: #062b49;
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            color: #6b7b88;
+            font-size: 15px;
+        }
+
+        /* =========================
+           METHODOLOGY
+        ========================= */
+
+        .methodology {
+
+            background: #062b49;
+
+            color: white;
+        }
+
+        .methodology .section-title h2 {
+            color: white;
+        }
+
+        .methodology .section-title p {
+            color: #c8d6e1;
+        }
+
+        .method-flow {
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            flex-wrap: wrap;
+
+            gap: 15px;
+        }
+
+        .method-step {
+
+            min-width: 150px;
+
+            padding: 25px 20px;
+
+            background: #0b3d64;
+
+            text-align: center;
+
+            border-radius: 6px;
+
+            border-bottom: 3px solid #f5a623;
+        }
+
+        .method-step strong {
+            display: block;
+
+            color: #f5a623;
+
+            font-size: 17px;
+
+            margin-bottom: 5px;
+        }
+
+        .arrow {
+            color: #f5a623;
+            font-size: 28px;
+        }
+
+        /* =========================
+           ABOUT
+        ========================= */
+
+        .about {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 70px;
+
+            align-items: center;
+        }
+
+        .about h2 {
+
+            color: #062b49;
+
+            font-size: 42px;
+
+            line-height: 1.2;
+
+            margin-bottom: 25px;
+        }
+
+        .about p {
+
+            color: #687785;
+
+            margin-bottom: 18px;
+        }
+
+        .about-box {
+
+            background: #062b49;
+
+            color: white;
+
+            padding: 50px;
+
+            border-radius: 8px;
+        }
+
+        .about-box .big-number {
+
+            color: #f5a623;
+
+            font-size: 55px;
+
+            font-weight: bold;
+
+            margin-bottom: 10px;
+        }
+
+        .about-box h3 {
+
+            font-size: 25px;
+
+            margin-bottom: 15px;
+        }
+
+        /* =========================
+           CONTACT
+        ========================= */
+
+        .contact {
+
+            text-align: center;
+
+            background: #edf3f7;
+        }
+
+        .contact h2 {
+
+            color: #062b49;
+
+            font-size: 42px;
+
+            margin-bottom: 15px;
+        }
+
+        .contact p {
+
+            color: #687785;
+
+            max-width: 650px;
+
+            margin: 0 auto 30px;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+
+            background: #031d32;
+
+            color: #9fb0bd;
+
+            text-align: center;
+
+            padding: 35px;
+
+            font-size: 14px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 850px) {
+
+            nav {
+                padding: 18px 5%;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .hero {
+                padding-left: 5%;
+                padding-right: 5%;
+            }
+
+            section {
+                padding: 75px 5%;
+            }
+
+            .services {
+                grid-template-columns: 1fr;
+            }
+
+            .about {
+                grid-template-columns: 1fr;
+            }
+
+            .method-flow {
+                flex-direction: column;
+            }
+
+            .arrow {
+                transform: rotate(90deg);
+            }
+
+        }
+
+    </style>
 </head>
+
 
 <body>
 
-    <h1>Marine Fuel Survey & ROB Control</h1>
 
-    <h2>Independent Bunker Survey & Fuel Quantity Verification</h2>
+    <!-- =========================
+         NAVIGATION
+    ========================= -->
 
-    <p>
-        Professional marine fuel measurement, bunker survey,
-        sounding and ROB verification services.
-    </p>
+    <nav>
 
-    <h2>Our Services</h2>
+        <div class="logo">
+            MARINE <span>FUEL</span> SURVEY
+        </div>
 
-    <ul>
-        <li>Bunker Quantity Survey</li>
-        <li>ROB Verification</li>
-        <li>Fuel Sampling</li>
-        <li>Sounding & Ullage Measurement</li>
-        <li>Fuel Quantity Reconciliation</li>
-        <li>Survey Reporting</li>
-    </ul>
+        <ul>
 
-    <h2>Our Methodology</h2>
+            <li>
+                <a href="#home">Home</a>
+            </li>
 
-    <p>
-        Measure → Verify → Calculate → Reconcile → Report
-    </p>
+            <li>
+                <a href="#services">Services</a>
+            </li>
 
-    <p>
-        Marine Fuel Survey & ROB Control
-    </p>
+            <li>
+                <a href="#methodology">Methodology</a>
+            </li>
+
+            <li>
+                <a href="#about">About</a>
+            </li>
+
+            <li>
+                <a href="#contact">Contact</a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+
+    <!-- =========================
+         HERO
+    ========================= -->
+
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <div class="hero-label">
+                Marine Fuel Measurement & Verification
+            </div>
+
+            <h1>
+
+                Marine Fuel Survey
+                <br>
+
+                <span>& ROB Control</span>
+
+            </h1>
+
+            <p>
+
+                Independent verification of bunker quantity,
+                fuel measurement and onboard Remaining On Board (ROB).
+
+                <br><br>
+
+                <em>
+                    Verifikasi independen quantity bunker,
+                    pengukuran fuel dan ROB di atas kapal.
+                </em>
+
+            </p>
+
+            <a href="#services" class="button">
+
+                Explore Our Services
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         SERVICES
+    ========================= -->
+
+    <section id="services">
+
+        <div class="section-title">
+
+            <div class="label">
+                What We Do
+            </div>
+
+            <h2>
+                Our Services
+            </h2>
+
+            <p>
+                Marine fuel measurement and quantity control
+                services for vessel owners, operators and managers.
+            </p>
+
+        </div>
+
+
+        <div class="services">
+
+
+            <div class="service-card">
+
+                <div class="service-icon">
+                    ⚓
+                </div>
+
+                <h3>
+                    Bunker Quantity Survey
+                </h3>
+
+                <p>
+                    Independent verification of bunker quantity
+                    delivered to the receiving vessel.
+                    <br><br>
+                    Verifikasi independen jumlah bunker
+                    yang diterima oleh kapal.
+                </p>
+
+            </div>
+
+
+            <div class="service-card">
+
+                <div class="service-icon">
+                    📏
+                </div>
+
+                <h3>
+                    ROB Verification
+                </h3>
+
+                <p>
+                    Tank sounding, ullage measurement and
+                    onboard fuel quantity verification.
+                    <br><br>
+                    Pengukuran sounding, ullage dan verifikasi
+                    quantity fuel di atas kapal.
+                </p>
+
+            </div>
+
+
+            <div class="service-card">
+
+                <div class="service-icon">
+                    🧪
+                </div>
+
+                <h3>
+                    Fuel Sampling
+                </h3>
+
+                <p>
+                    Representative bunker sampling,
+                    sealing and documentation.
+                    <br><br>
+                    Pengambilan sample bunker yang representatif,
+                    sealing dan dokumentasi.
+                </p>
+
+            </div>
+
+
+            <div class="service-card">
+
+                <div class="service-icon">
+                    📊
+                </div>
+
+                <h3>
+                    Fuel Reconciliation
+                </h3>
+
+                <p>
+                    Comparison between opening ROB,
+                    bunker received, consumption and closing ROB.
+                    <br><br>
+                    Rekonsiliasi ROB awal, bunker diterima,
+                    konsumsi dan ROB akhir.
+                </p>
+
+            </div>
+
+
+            <div class="service-card">
+
+                <div class="service-icon">
+                    🔧
+                </div>
+
+                <h3>
+                    MFM & Flowmeter
+                </h3>
+
+                <p>
+                    Verification and monitoring of
+                    flowmeter-based bunker measurement.
+                    <br><br>
+                    Verifikasi dan monitoring pengukuran
+                    bunker berbasis flowmeter.
+                </p>
+
+            </div>
+
+
+            <div class="service-card">
+
+                <div class="service-icon">
+                    📋
+                </div>
+
+                <h3>
+                    Survey Reporting
+                </h3>
+
+                <p>
+                    Clear, traceable and documented
+                    bunker survey reports.
+                    <br><br>
+                    Laporan survey yang jelas,
+                    terdokumentasi dan dapat ditelusuri.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         METHODOLOGY
+    ========================= -->
+
+    <section class="methodology" id="methodology">
+
+        <div class="section-title">
+
+            <div class="label">
+                Our Approach
+            </div>
+
+            <h2>
+                Our Methodology
+            </h2>
+
+            <p>
+                A systematic approach to fuel quantity verification.
+                <br>
+                Pendekatan sistematis untuk verifikasi quantity fuel.
+            </p>
+
+        </div>
+
+
+        <div class="method-flow">
+
+
+            <div class="method-step">
+
+                <strong>
+                    MEASURE
+                </strong>
+
+                Sounding / Ullage
+
+            </div>
+
+
+            <div class="arrow">
+                →
+            </div>
+
+
+            <div class="method-step">
+
+                <strong>
+                    VERIFY
+                </strong>
+
+                Tank & Documents
+
+            </div>
+
+
+            <div class="arrow">
+                →
+            </div>
+
+
+            <div class="method-step">
+
+                <strong>
+                    CALCULATE
+                </strong>
+
+                Volume & Mass
+
+            </div>
+
+
+            <div class="arrow">
+                →
+            </div>
+
+
+            <div class="method-step">
+
+                <strong>
+                    RECONCILE
+                </strong>
+
+                ROB & BDN
+
+            </div>
+
+
+            <div class="arrow">
+                →
+            </div>
+
+
+            <div class="method-step">
+
+                <strong>
+                    REPORT
+                </strong>
+
+                Survey Evidence
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ABOUT
+    ========================= -->
+
+    <section id="about">
+
+        <div class="about">
+
+
+            <div>
+
+                <div class="section-title"
+                     style="text-align:left; margin:0 0 25px 0;">
+
+                    <div class="label">
+                        About Our Approach
+                    </div>
+
+                </div>
+
+
+                <h2>
+
+                    Reliable Fuel Measurement.
+                    Transparent Data.
+
+                </h2>
+
+
+                <p>
+
+                    Fuel represents a significant operating
+                    cost for vessel owners and operators.
+
+                </p>
+
+
+                <p>
+
+                    Our approach focuses on accurate measurement,
+                    transparent calculation and traceable documentation.
+
+                </p>
+
+
+                <p>
+
+                    Kami membantu perusahaan pelayaran memahami
+                    quantity fuel yang diterima, digunakan dan tersisa
+                    di atas kapal secara lebih terukur.
+
+                </p>
+
+
+            </div>
+
+
+            <div class="about-box">
+
+                <div class="big-number">
+                    01
+                </div>
+
+                <h3>
+                    Measure with Confidence
+                </h3>
+
+                <p>
+
+                    Physical measurement supported by
+                    documented procedures and vessel records.
+
+                    <br><br>
+
+                    Pengukuran fisik didukung prosedur
+                    dan dokumentasi yang dapat ditelusuri.
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CONTACT
+    ========================= -->
+
+    <section class="contact" id="contact">
+
+        <div class="section-title">
+
+            <div class="label">
+                Contact
+            </div>
+
+            <h2>
+                Let's Talk About Fuel Control
+            </h2>
+
+            <p>
+
+                Discuss your bunker survey,
+                ROB verification or fuel quantity
+                control requirements.
+
+                <br><br>
+
+                Diskusikan kebutuhan bunker survey,
+                verifikasi ROB atau fuel quantity control
+                untuk armada Anda.
+
+            </p>
+
+        </div>
+
+
+        <a
+            href="mailto:your@email.com"
+            class="button">
+
+            Contact Us
+
+        </a>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        <strong>
+            MARINE FUEL SURVEY & ROB CONTROL
+        </strong>
+
+        <br><br>
+
+        Independent Marine Fuel Measurement & Verification
+
+        <br><br>
+
+        © 2026 — All Rights Reserved
+
+    </footer>
+
 
 </body>
 </html>
